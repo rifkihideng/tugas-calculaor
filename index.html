@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tugas Kalkulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+    }
+
+    .login-form, .calculator {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .login-form h2, .calculator h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .login-form input, .calculator input {
+      display: block;
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .login-form button, .calculator button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #4facfe;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-form button:hover, .calculator button:hover {
+      background: #00c6ff;
+    }
+
+    .calculator {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Form Login -->
+  <div class="login-form">
+    <h2>Selamat datang</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Kalkulator -->
+  <div class="calculator">
+    <h2>Kalkulator</h2>
+    <input type="number" id="num1" placeholder="Angka pertama">
+    <input type="number" id="num2" placeholder="Angka kedua">
+    <button onclick="calculate('+')">Tambah</button>
+    <button onclick="calculate('-')">Kurang</button>
+    <button onclick="calculate('*')">Kali</button>
+    <button onclick="calculate('/')">Bagi</button>
+    <h3>Hasil: <span id="result">0</span></h3>
+  </div>
+
+  <script>
+    // Login function
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Validasi sederhana
+      if (username === "admin" && password === "1234") {
+        alert("Login berhasil!");
+        document.querySelector(".login-form").style.display = "none";
+        document.querySelector(".calculator").style.display = "block";
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+
+    // Kalkulator function
+    function calculate(operator) {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      let result = 0;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Masukkan kedua angka!");
+        return;
+      }
+
+      switch (operator) {
+        case '+':
+          result = num1 + num2;
+          break;
+        case '-':
+          result = num1 - num2;
+          break;
+        case '*':
+          result = num1 * num2;
+          break;
+        case '/':
+          result = num1 / num2;
+          break;
+        default:
+          alert("Operator tidak valid!");
+          return;
+      }
+
+      document.getElementById("result").textContent = result;
+    }
+  </script>
+</body>
+</html>
+
+
